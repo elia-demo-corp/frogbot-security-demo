@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unlimited-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vulnerable-app
+  template:
+    metadata:
+      labels:
+        app: vulnerable-app
+    spec:
+      automountServiceAccountToken: true
+      containers:
+      - name: app
+        image: nginx:latest
+        securityContext:
+          runAsNonRoot: false
+          readOnlyRootFilesystem: false
+        # No resource limits defined - can consume unlimited resources

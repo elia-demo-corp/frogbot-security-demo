@@ -1,0 +1,21 @@
+FROM ubuntu:18.04
+
+# Running as root (insecure)
+USER root
+
+# Hardcoded secrets (bad practice)
+ENV AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+ENV AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+ENV DATABASE_PASSWORD=admin123
+
+# Installing unnecessary packages
+RUN apt-get update && apt-get install -y \
+    openssh-server \
+    telnet \
+    ftp
+
+# Exposing sensitive ports
+EXPOSE 22 23 21 3306 5432
+
+# Running SSH daemon as root
+CMD ["/usr/sbin/sshd", "-D"]

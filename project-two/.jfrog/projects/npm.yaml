@@ -1,0 +1,8 @@
+version: 1
+type: npm
+resolver:
+    repo: elia-secureflow-npm-virtual
+    serverId: tsmemea
+deployer:
+    repo: elia-secureflow-npm-virtual
+    serverId: tsmemea
